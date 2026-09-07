@@ -1,7 +1,7 @@
 VWX FAILS
 VECTORWORKS FIXES, AUTOMATION, INSPECTION & LIBRARY SCRIPTS
 
-Package date: 2026-08-30
+Package date: 2026-09-07
 vibed by Chuckles
 
 ========================================================================
@@ -12,7 +12,7 @@ VWX FAILS is a small collection of Vectorworks / Spotlight utilities built
 to solve recurring workflow problems, inspect Vectorworks internals, repair
 resource metadata, and automate repetitive drawing operations.
 
-The nine scripts are numbered to match the working script palette / plug-in
+The ten scripts are numbered to match the working script palette / plug-in
 order:
 
 1 RESOURCE AUDITOR
@@ -24,6 +24,7 @@ order:
 7 LIGHTING DEVICE ATTRIBUTES
 8 DR. DOOM
 9 PICK A UNIT! ANY UNIT!
+10 F.I.N.G.
 
 
 GENERAL USE / INSTALLATION
@@ -937,7 +938,7 @@ Size outlier:
     Simple Line objects are excluded.
 
 Large filled object:
-    >= 5% of its layer bounding-box area
+    >= 5% of its layer's bounding-box area
 
 Spatial outlier:
     >= 60% of its layer diagonal
@@ -1083,6 +1084,198 @@ It does not move Lighting Devices, edit parameters, change layers or classes,
 edit Symbol Definitions, or alter geometry.
 
 
+
+========================================================================
+10 F.I.N.G.
+Version: v1.0
+File Inventory Normalization Governor
+========================================================================
+
+PURPOSE
+-------
+
+F.I.N.G. is a manual Vectorworks inventory switcher for Vectorworks 2026
+Update 6.
+
+It was created to solve the problem of a drawing's Equipment Summary Keys
+using the wrong Inventory when multiple custom inventory XML files are present.
+
+The tested mechanism is Vectorworks' inventory XML Use flag:
+
+    <IsUsedThisInventory>
+        <Use>True</Use>
+    </IsUsedThisInventory>
+
+F.I.N.G. makes one chosen inventory active and sets the other discovered
+inventory XML files inactive.
+
+This is a MANUAL inventory switch.
+
+It does not monitor document changes automatically.
+
+Run F.I.N.G. after changing files and before issuing inventory-dependent
+paperwork.
+
+
+WHAT IT DOES
+------------
+
+F.I.N.G.:
+
+- discovers inventory XML files in the Vectorworks inventory folder
+- reads each inventory's current Use flag
+- shows the currently enabled inventory file(s)
+- lets the user choose the inventory that should be active
+- sets the chosen inventory to Use=True
+- sets the other discovered inventories to Use=False
+- can remember the chosen inventory inside the current Vectorworks document
+- can REBIND a drawing to its previously remembered inventory
+- resets Summary Key objects throughout the drawing after switching inventory
+- redraws the document
+- verifies the inventory XML flags on disk after the change
+- saves a last-run report in the Vectorworks user folder
+
+
+DOCUMENT BINDING
+----------------
+
+When:
+
+    Remember this inventory for this file
+
+is enabled, F.I.N.G. stores the chosen inventory identity in a document Record
+Format named:
+
+    __FING_DOCUMENT_BINDING
+
+using the field:
+
+    InventoryName
+
+This allows a drawing to remember which inventory it expects.
+
+The REBIND action restores that saved document binding regardless of the
+current picker selection, then refreshes the file's Summary Keys.
+
+Save the Vectorworks drawing after setting its binding if you want the binding
+to persist with the file.
+
+
+USER INTERFACE
+--------------
+
+The main confirmation button is:
+
+    THIS IS MY INVENTORY
+
+Additional action:
+
+    REBIND
+        Restore the inventory remembered by this drawing and update its
+        Summary Keys.
+
+The interface also contains:
+
+    UNASSOCIATED
+
+but that action is DISABLED in v1.0.
+
+Native equipment source-assignment selection has not been verified strongly
+enough to expose that operation.
+
+
+SUMMARY KEY REFRESH
+-------------------
+
+After inventory activation, F.I.N.G. searches the drawing for Summary Key
+parametric objects and requests a reset for each one.
+
+The search includes objects inside drawing groups and viewport annotations.
+
+Symbol Definitions are excluded so F.I.N.G. does not modify resource
+definitions merely to refresh placed drawing objects.
+
+F.I.N.G. reports how many Summary Keys were requested for refresh and any API
+reset errors.
+
+
+BACKUPS / WRITE SAFETY
+----------------------
+
+Before changing an inventory XML file, F.I.N.G. creates verified backups under:
+
+    Vectorworks user folder
+    / _FING
+    / backups
+    / <timestamp>
+
+A manifest records each changed inventory and its before/after Use state.
+
+Inventory-file writes are atomic.
+
+Before the first write, F.I.N.G. verifies that every file still matches the
+version it inspected.
+
+It checks again immediately before each write.
+
+After writing, it reads the changed files back and verifies the exact bytes.
+
+If a batch write fails, F.I.N.G. attempts to restore already-written files to
+their original contents.
+
+If a file was concurrently changed by something else, F.I.N.G. does not
+blindly overwrite that concurrent edit.
+
+
+LIMITATIONS / IMPORTANT BEHAVIOR
+--------------------------------
+
+Inventory activation is GLOBAL to the Vectorworks inventory XML files.
+
+It is not isolated per open document.
+
+Therefore:
+
+- run F.I.N.G. after switching between drawings that expect different
+  inventories
+- save a drawing after setting its document binding
+- use REBIND when returning to a drawing whose remembered inventory should be
+  restored
+
+F.I.N.G. verifies the inventory flags written to disk.
+
+Its report deliberately does NOT claim that Vectorworks' native in-memory
+inventory state or visible Equipment Summary Key totals have been independently
+verified by an API.
+
+The final visual result should still be treated as the authoritative check.
+
+
+UNFINISHED PROBE SAFETY CHECK
+-----------------------------
+
+F.I.N.G. refuses to run if the earlier live-test probe still has an unfinished
+restore recorded at:
+
+    Vectorworks user folder
+    / _FING_PROBE
+    / 06_pending_restore.json
+
+Restore that probe state first before using F.I.N.G.
+
+
+WHAT IT DOES NOT DO
+-------------------
+
+F.I.N.G. does not:
+
+- automatically detect document switching
+- automatically monitor which drawing is frontmost
+- edit inventory quantities
+- edit equipment source assignments
+- expose the UNASSOCIATED workflow in v1.0
+- modify Symbol Definitions while refreshing Summary Keys
+
 ========================================================================
 ========================================================================
 VERSION / AUTHORSHIP
@@ -1115,7 +1308,10 @@ Version: v1.2
 9 PICK A UNIT! ANY UNIT!
 Version: v1.0.2
 
-Package date: 2026-08-30
+10 F.I.N.G.
+Version: v1.0
+
+Package date: 2026-09-07
 vibed by Chuckles
 
 VWX FAILS =
