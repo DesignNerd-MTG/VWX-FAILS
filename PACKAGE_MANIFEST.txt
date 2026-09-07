@@ -1,11 +1,11 @@
-VWX FAILS - PUBLISHED PACK 1-9
-Package date: 2026-08-31
+VWX FAILS - PUBLISHED PACK 1-10
+Package date: 2026-09-07
 
-Nine published scripts plus README.
+Ten published scripts plus canonical README.md.
 
 SCRIPT CONTENTS WERE NOT EDITED.
-Archive filenames for #8 and #9 were normalized for package numbering only;
-their file bytes are unchanged from the uploaded published sources.
+Repository filenames are normalized for package numbering only;
+their file bytes remain the published source contents.
 
 SHA256:
 1 RESOURCE AUDITOR.py  ca63e464108d8dfe43888d4cf7f8a3af0e8332ea7f22a23a2952de4ea345d809
@@ -17,4 +17,6 @@ SHA256:
 7 LIGHTING DEVICE ATTRIBUTES.py  5732906907487daf3513cbc65415199ea620a1178d6b24fc16734248335a2d1b
 8 DR DOOM.py  94a3d824057044f13231449806cf866a0c229665f7b93c0a0a1b666e6c03e403
 9 PICK A UNIT! ANY UNIT!.py  730008a674f5c16a1ab71f284f1054d85444831746d61848f2af9d35dc649647
-README.txt  02cb8c5d1cab6120b0c4f8c1050f9a759f6fbc19ea99bf9a1146090be57758d5
+10 FING.py  2ec20ad4f00a0f346f842ace0182d3d38da318aaebfcf3d57dc9c2f3171dc1a1
+
+README.md is the canonical project documentation and is maintained independently of the script-byte manifest.
