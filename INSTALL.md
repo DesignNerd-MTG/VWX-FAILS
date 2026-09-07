@@ -2,6 +2,7 @@ VWX FAILS
 INSTALLATION AND DEPLOYMENT
 
 Package date: 2026-09-07
+Collection release: VWX FAILS 2.0
 
 ========================================================================
 WHICH FILES SHOULD I USE?
@@ -58,8 +59,11 @@ SOURCE / VSM RELEASE RULE
 
 Every published shelf tool should have one pair:
 
-    src/<number and descriptive name>.py
-    plug-ins/<same number and descriptive name>.vsm
+    src/<number and descriptive name and tool version>.py
+    plug-ins/<same number and descriptive name and tool version>.vsm
+
+The source and VSM must use the same versioned base filename. The version is
+the independent tool version, not the VWX FAILS collection version.
 
 When a tool changes:
 
@@ -81,16 +85,16 @@ The current VSM files in this release are preserved exactly as exported.
 When each plug-in is next rebuilt, use these descriptive Vectorworks command
 names so the acronyms remain recognizable without hiding what the tools do:
 
-1  RESOURCE AUDITOR
-2  MINDREADER
-3  MINDREADER ACCESSORY AUTOPSY
-4  HYPERLINK REBUILDER
-5  S.H.I.T. — STIRRUP HANGER INSERTION TRICK
-6  FIXTURE TYPE TO NEW LAYER
-7  LIGHTING DEVICE ATTRIBUTES
-8  DR. DOOM — DRAWING REVIEW, DIAGNOSTICS, ORGANIZATION & OBJECT MANIPULATION
-9  PICK A UNIT! ANY UNIT!
-10 F.I.N.G. — FILE INVENTORY NORMALIZATION GOVERNOR
-99 CHUCKLES NOTES
+1  RESOURCE AUDITOR v2.7
+2  MINDREADER v5.0
+3  MINDREADER ACCESSORY AUTOPSY v1.0
+4  HYPERLINK REBUILDER v2.0
+5  S.H.I.T. — STIRRUP HANGER INSERTION TRICK v1.3
+6  FIXTURE TYPE TO NEW LAYER v1.2
+7  LIGHTING DEVICE ATTRIBUTES v1.5
+8  DR. DOOM — DRAWING REVIEW, DIAGNOSTICS, ORGANIZATION & OBJECT MANIPULATION v1.2
+9  PICK A UNIT! ANY UNIT! v1.0.2
+10 F.I.N.G. — FILE INVENTORY NORMALIZATION GOVERNOR v1.0
+99 CHUCKLES NOTES v1.0.3
 
 Keep the shelf number first and keep CHUCKLES NOTES last.
