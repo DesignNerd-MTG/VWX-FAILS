@@ -12,7 +12,7 @@ VWX FAILS is a small collection of Vectorworks / Spotlight utilities built
 to solve recurring workflow problems, inspect Vectorworks internals, repair
 resource metadata, and automate repetitive drawing operations.
 
-The ten scripts are numbered to match the working script palette / plug-in
+The eleven scripts are numbered to match the working script palette / plug-in
 order:
 
 1 RESOURCE AUDITOR
@@ -25,6 +25,7 @@ order:
 8 DR. DOOM
 9 PICK A UNIT! ANY UNIT!
 10 F.I.N.G.
+99 CHUCKLES NOTES
 
 
 GENERAL USE / INSTALLATION
@@ -1278,6 +1279,53 @@ F.I.N.G. does not:
 
 ========================================================================
 ========================================================================
+99 CHUCKLES NOTES
+Version: v1.0.3
+In-Vectorworks Quick Reference
+========================================================================
+
+PURPOSE
+-------
+
+CHUCKLES NOTES is the maintained in-Vectorworks quick-reference guide for the
+complete VWX FAILS script collection.
+
+It opens a large, scrollable dialog containing an abridged description of every
+published tool, including its current version, purpose, normal workflow, and
+important limitations.
+
+
+RUNTIME BEHAVIOR
+----------------
+
+The notes are embedded directly in the Python script in the clearly marked
+NOTES_TEXT block.
+
+CHUCKLES NOTES requires no internet connection, GitHub access, or separate
+README file at runtime.
+
+The Windows CRLF display conversion is intentional. Vectorworks' multiline
+control mangles the embedded formatting without complete CRLF pairs.
+
+
+MAINTENANCE
+-----------
+
+Whenever the VWX FAILS shelf changes:
+
+1. Update the opening script inventory, affected detailed entries, final version
+   list, package date, and CHUCKLES NOTES version.
+2. Preserve every unrelated entry and keep CHUCKLES NOTES as the final entry.
+3. Keep the embedded quick reference comfortably below 30,000 characters.
+4. Preserve the dialog dimensions, functional code, and CRLF conversion unless
+   a tested Vectorworks issue requires a change.
+5. Run Python syntax, CRLF integrity, and inventory-agreement checks.
+6. Update the deployed Script Resource or menu-command plug-in.
+
+Editing text in the displayed window does not change the Python script.
+
+
+========================================================================
 VERSION / AUTHORSHIP
 ========================================================================
 
@@ -1311,8 +1359,12 @@ Version: v1.0.2
 10 F.I.N.G.
 Version: v1.0
 
+99 CHUCKLES NOTES
+Version: v1.0.3
+
 Package date: 2026-09-07
 vibed by Chuckles
 
 VWX FAILS =
 Vectorworks Fixes, Automation, Inspection & Library Scripts.
+
