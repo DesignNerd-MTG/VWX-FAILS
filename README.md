@@ -28,10 +28,32 @@ order:
 99 CHUCKLES NOTES
 
 
+REPOSITORY LAYOUT
+-----------------
+
+    src/
+        Canonical, human-readable Python source for every published tool.
+
+    plug-ins/
+        Ready-to-install Vectorworks menu-command plug-ins in VSM format.
+
+    INSTALL.md
+        Installation instructions for both VSM plug-ins and Script Resources.
+
+    PACKAGE_MANIFEST.txt
+        Release inventory and SHA-256 checksums for the source and VSM files.
+
+The files in src/ are the source of truth. The matching files in plug-ins/ are
+deployed copies exported from Vectorworks. Changes to a .py file do not
+automatically update its .vsm counterpart.
+
+
 GENERAL USE / INSTALLATION
 --------------------------
 
 These files contain Python code intended to run inside Vectorworks.
+
+For complete installation and update instructions, see INSTALL.md.
 
 They can be maintained in two useful ways:
 
@@ -1367,4 +1389,3 @@ vibed by Chuckles
 
 VWX FAILS =
 Vectorworks Fixes, Automation, Inspection & Library Scripts.
-
