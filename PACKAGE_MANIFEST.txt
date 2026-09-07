@@ -1,38 +1,37 @@
-VWX FAILS - PUBLISHED SOURCE + VSM PACK 1-10, 99
+VWX FAILS 2.0 - PUBLISHED SOURCE + VSM PACK 1-10, 99
 Package date: 2026-09-07
 
 Eleven published Python sources and eleven matching Vectorworks VSM plug-ins.
 
-The source files were moved into src/ without changing their bytes. The VSM
-files in plug-ins/ are preserved exactly as supplied. Files #8 and #10 use
-expanded repository filenames so their purpose is visible without knowing the
-acronym.
+The source and VSM files use matching descriptive base filenames containing
+each tool's independent version. Source and VSM bytes are unchanged from the
+previously verified files; this release normalizes their repository paths.
 
 SOURCE SHA256:
-src/1 RESOURCE AUDITOR.py  ca63e464108d8dfe43888d4cf7f8a3af0e8332ea7f22a23a2952de4ea345d809
-src/2 MINDREADER.py  e8668f884e90eb73a063eb73929bed9c0668f52e5341c74cd87610f01de22b5f
-src/3 MINDREADER ACCESSORY AUTOPSY.py  bc2935c9b94771169d977f70a1e599c67e7f05a0e98fd43a13674ad0f7d28afe
-src/4 HYPERLINK REBUILDER.py  186973a98537693b29cb893533a81d743be037a5f9138bf06093c4e0f7d0a72a
-src/5 STIRRUP HANGER INSERTION TRICK.py  1f37846d324dc3ba6c4e19acf934aad7974a6ce0a7e0aa7d4077dcb6eea51eb5
-src/6 FIXTURE TYPE TO NEW LAYER.py  a296885a644f4fd5159b3b0692a34db26d5eabd6ce1922a73cb067dba62fb37a
-src/7 LIGHTING DEVICE ATTRIBUTES.py  5732906907487daf3513cbc65415199ea620a1178d6b24fc16734248335a2d1b
-src/8 DR DOOM DWG Review, Diag, Org & Obj Manip.py  94a3d824057044f13231449806cf866a0c229665f7b93c0a0a1b666e6c03e403
-src/9 PICK A UNIT! ANY UNIT!.py  730008a674f5c16a1ab71f284f1054d85444831746d61848f2af9d35dc649647
-src/10 FING  File Inventory Normalization Governor.py  2ec20ad4f00a0f346f842ace0182d3d38da318aaebfcf3d57dc9c2f3171dc1a1
-src/99_CHUCKLES NOTES.py  970c3f592cb8b68311ebbb829a0f73e5050ef2cf804032b8cffc07f27dec6842
+src/1 RESOURCE AUDITOR v2.7.py  ca63e464108d8dfe43888d4cf7f8a3af0e8332ea7f22a23a2952de4ea345d809
+src/2 MINDREADER v5.0.py  e8668f884e90eb73a063eb73929bed9c0668f52e5341c74cd87610f01de22b5f
+src/3 MINDREADER ACCESSORY AUTOPSY v1.0.py  bc2935c9b94771169d977f70a1e599c67e7f05a0e98fd43a13674ad0f7d28afe
+src/4 HYPERLINK REBUILDER v2.0.py  186973a98537693b29cb893533a81d743be037a5f9138bf06093c4e0f7d0a72a
+src/5 S.H.I.T. STIRRUP HANGER INSERTION TRICK v1.3.py  1f37846d324dc3ba6c4e19acf934aad7974a6ce0a7e0aa7d4077dcb6eea51eb5
+src/6 FIXTURE TYPE TO NEW LAYER v1.2.py  a296885a644f4fd5159b3b0692a34db26d5eabd6ce1922a73cb067dba62fb37a
+src/7 LIGHTING DEVICE ATTRIBUTES v1.5.py  5732906907487daf3513cbc65415199ea620a1178d6b24fc16734248335a2d1b
+src/8 DR DOOM Drawing Review Diagnostics Organization & Object Manipulation v1.2.py  94a3d824057044f13231449806cf866a0c229665f7b93c0a0a1b666e6c03e403
+src/9 PICK A UNIT! ANY UNIT! v1.0.2.py  730008a674f5c16a1ab71f284f1054d85444831746d61848f2af9d35dc649647
+src/10 F.I.N.G. File Inventory Normalization Governor v1.0.py  2ec20ad4f00a0f346f842ace0182d3d38da318aaebfcf3d57dc9c2f3171dc1a1
+src/99 CHUCKLES NOTES v1.0.3.py  970c3f592cb8b68311ebbb829a0f73e5050ef2cf804032b8cffc07f27dec6842
 
 VSM SHA256:
-plug-ins/1 RESOURCE AUDITOR.vsm  df650661e04ead5b055b6a67dadb3e20f76c13a2015710a8f25f407f68e95eac
-plug-ins/2 MINDREADER.vsm  8ebaa328e1bd7e48c9fa2002daae0e738b78983b445366f981c2c5004f4fa9ae
-plug-ins/3 MINDREADER ACCESSORY AUTOPSY.vsm  fee7d8f22cd2452d43c8241c025585d2664bebdb40774ff08619d39c34572586
-plug-ins/4 HYPERLINK REBUILDER.vsm  e716cd89b29a1e76acc8cf1a9be9d53197856b7110f14a72039263bf2f6d9f7c
-plug-ins/5 STIRRUP HANGER INSERTION TRICK.vsm  2d2c121f5183832b94b72386f70ed803c0c9c1df79815ab7ad8c87567fce55a2
-plug-ins/6 FIXTURE TYPE TO NEW LAYER.vsm  45b44881aad948b04919cbf9bf78ea60a084e0d537365bf06b55d90e65af2070
-plug-ins/7 LIGHTING DEVICE ATTRIBUTES.vsm  0c73449595cc4dd69758b584be0d43b1ed5996426b3c0fbd5da551fcf0272ab1
-plug-ins/8 DR DOOM DWG Review, Diag, Org & Obj Manip.vsm  ac15016fe11a79e5abad8fd4553cd909f4fd80f1ca45570897cf8545d0c58185
-plug-ins/9 PICK A UNIT! ANY UNIT!.vsm  66ca2d7c68b6035a836f6b46734cb3952dc46cc28238e80f73ae741029f716d4
-plug-ins/10 FING  File Inventory Normalization Governor.vsm  985ccc7e647cb8a9140edd619b2fdd173b3a7ef6fe41f3fd2aef4324e7064131
-plug-ins/99_CHUCKLES NOTES.vsm  605f9e31dd7511bded83edc302960237776556fc5e6650d4898d0cb6e24a904f
+plug-ins/1 RESOURCE AUDITOR v2.7.vsm  df650661e04ead5b055b6a67dadb3e20f76c13a2015710a8f25f407f68e95eac
+plug-ins/2 MINDREADER v5.0.vsm  8ebaa328e1bd7e48c9fa2002daae0e738b78983b445366f981c2c5004f4fa9ae
+plug-ins/3 MINDREADER ACCESSORY AUTOPSY v1.0.vsm  fee7d8f22cd2452d43c8241c025585d2664bebdb40774ff08619d39c34572586
+plug-ins/4 HYPERLINK REBUILDER v2.0.vsm  e716cd89b29a1e76acc8cf1a9be9d53197856b7110f14a72039263bf2f6d9f7c
+plug-ins/5 S.H.I.T. STIRRUP HANGER INSERTION TRICK v1.3.vsm  2d2c121f5183832b94b72386f70ed803c0c9c1df79815ab7ad8c87567fce55a2
+plug-ins/6 FIXTURE TYPE TO NEW LAYER v1.2.vsm  45b44881aad948b04919cbf9bf78ea60a084e0d537365bf06b55d90e65af2070
+plug-ins/7 LIGHTING DEVICE ATTRIBUTES v1.5.vsm  0c73449595cc4dd69758b584be0d43b1ed5996426b3c0fbd5da551fcf0272ab1
+plug-ins/8 DR DOOM Drawing Review Diagnostics Organization & Object Manipulation v1.2.vsm  ac15016fe11a79e5abad8fd4553cd909f4fd80f1ca45570897cf8545d0c58185
+plug-ins/9 PICK A UNIT! ANY UNIT! v1.0.2.vsm  66ca2d7c68b6035a836f6b46734cb3952dc46cc28238e80f73ae741029f716d4
+plug-ins/10 F.I.N.G. File Inventory Normalization Governor v1.0.vsm  985ccc7e647cb8a9140edd619b2fdd173b3a7ef6fe41f3fd2aef4324e7064131
+plug-ins/99 CHUCKLES NOTES v1.0.3.vsm  605f9e31dd7511bded83edc302960237776556fc5e6650d4898d0cb6e24a904f
 
 README.md and INSTALL.md are canonical documentation and are maintained
 independently of this source/VSM byte manifest.

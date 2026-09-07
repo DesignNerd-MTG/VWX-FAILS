@@ -2,6 +2,7 @@ VWX FAILS
 VECTORWORKS FIXES, AUTOMATION, INSPECTION & LIBRARY SCRIPTS
 
 Package date: 2026-09-07
+Collection release: VWX FAILS 2.0
 vibed by Chuckles
 
 ========================================================================
@@ -46,6 +47,21 @@ REPOSITORY LAYOUT
 The files in src/ are the source of truth. The matching files in plug-ins/ are
 deployed copies exported from Vectorworks. Changes to a .py file do not
 automatically update its .vsm counterpart.
+
+
+VERSIONING
+----------
+
+VWX FAILS 2.0 is the collection release. Each tool keeps its own independent
+version number.
+
+Every published source/VSM pair uses the same versioned base filename:
+
+    <shelf number> <descriptive tool name> v<tool version>.py
+    <shelf number> <descriptive tool name> v<tool version>.vsm
+
+The version in a filename identifies that tool, not the overall collection.
+PACKAGE_MANIFEST.txt records the complete pairing and file checksums.
 
 
 GENERAL USE / INSTALLATION
