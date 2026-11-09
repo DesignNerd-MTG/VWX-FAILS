@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# VWX FAILS - FIXTURE TYPE TO NEW LAYER v1.2
+# VWX FAILS - FIXTURE TYPE TO NEW LAYER v1.2.1
 # vibed by Chuckles
-# Date: 2026-08-19
-# Version: v1.2
+# Date: 2026-11-09
+# Version: v1.2.1
 #
 # Menu Command: Fixture Type to New Layer  (VW26-safe)
 import vs
@@ -103,6 +103,27 @@ def group_by_type(handles):
         groups.setdefault(key, {'raw':raw,'items':[]})['items'].append(h)
     return groups
 
+def move_to_layer(h, layer):
+    """Return moved, already, or failed; count only verified successful moves."""
+    try:
+        if vs.GetParent(h) == layer:
+            return "already"
+        if vs.SetParent(h, layer) is not True:
+            return "failed"
+        return "moved" if vs.GetParent(h) == layer else "failed"
+    except Exception:
+        return "failed"
+
+
+def move_groups(groups, layers):
+    counts = {}
+    for key, info in groups.items():
+        counts[key] = {"moved": 0, "already": 0, "failed": 0}
+        for h in info['items']:
+            counts[key][move_to_layer(h, layers[key])] += 1
+    return counts
+
+
 def main():
     # scope
     only_selected = vs.YNDialog("Move ONLY currently selected LDs?\n\nYes = selection only\nNo  = ALL that match selected Instrument Type(s)")
@@ -145,7 +166,7 @@ def main():
         else "ALL Lighting Devices matching selected Instrument Type(s)"
     )
     preview = (
-        "FIXTURE TYPE TO NEW LAYER v1.2\n\n"
+        "FIXTURE TYPE TO NEW LAYER v1.2.1\n\n"
         "Seed selection: {} Lighting Device(s)\n"
         "Seed Instrument Type(s):\n- {}\n\n"
         "Scope: {}\n"
@@ -166,20 +187,24 @@ def main():
         lname = sanitize(prefix + info['raw'])
         key2layer[k] = ensure_layer(lname)
 
-    began=False; moved=0
+    began=False
     try:
         if hasattr(vs,"UndoBegin"): vs.UndoBegin(); began=True
-        for k,info in g_move.items():
-            lyr = key2layer[k]
-            for h in info['items']:
-                vs.SetParent(h, lyr); moved += 1
+        counts = move_groups(g_move, key2layer)
         vs.ReDrawAll()
     finally:
         if began and hasattr(vs,"UndoEnd"): vs.UndoEnd()
 
-    lines = ["Moved {} Lighting Devices.".format(moved), "", "Grouped by: Instrument Type", "Layers created/used:"]
+    moved = sum(c["moved"] for c in counts.values())
+    failed = sum(c["failed"] for c in counts.values())
+    already = sum(c["already"] for c in counts.values())
+    lines = ["Moved {} Lighting Devices.".format(moved),
+             "Failed or could not verify: {}".format(failed),
+             "Already on target layer: {}".format(already), "", "Grouped by: Instrument Type", "Layers created/used:"]
     for k,info in sorted(g_move.items(), key=lambda kv: kv[1]['raw'].lower()):
-        lines.append("• {} → {} ({})".format(info['raw'], vs.GetLName(key2layer[k]), len(info['items'])))
+        lines.append("• {} → {} ({} moved, {} failed/unverified, {} already there)".format(
+            info['raw'], vs.GetLName(key2layer[k]), counts[k]["moved"],
+            counts[k]["failed"], counts[k]["already"]))
     vs.AlrtDialog("\n".join(lines))
 
 if __name__=="__main__":

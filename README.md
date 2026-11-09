@@ -1,8 +1,8 @@
 VWX FAILS
 VECTORWORKS FIXES, AUTOMATION, INSPECTION & LIBRARY SCRIPTS
 
-Package date: 2026-09-07
-Collection release: VWX FAILS 2.0
+Package date: 2026-11-09
+Collection release: VWX FAILS 2.0.1
 vibed by Chuckles
 
 ========================================================================
@@ -52,7 +52,7 @@ automatically update its .vsm counterpart.
 VERSIONING
 ----------
 
-VWX FAILS 2.0 is the collection release. Each tool keeps its own independent
+VWX FAILS 2.0.1 is the collection release. Each tool keeps its own independent
 version number.
 
 Every published source/VSM pair uses the same versioned base filename:
@@ -62,6 +62,31 @@ Every published source/VSM pair uses the same versioned base filename:
 
 The version in a filename identifies that tool, not the overall collection.
 PACKAGE_MANIFEST.txt records the complete pairing and file checksums.
+
+
+PATCH RELEASE 2.0.1
+-------------------
+
+This release changes three tools:
+
+- Resource Auditor v2.7.1 checks reference status with IsResourceReferenced.
+  Locked resources and resources whose status cannot be verified are skipped.
+- MINDREADER v5.0.1 reads the two point tuples returned by GetBBox.
+- Fixture Type to New Layer v1.2.1 reports only verified successful moves and
+  identifies failures instead of counting every attempt as a move.
+
+CHUCKLES NOTES v1.0.4 documents these changes. The other seven tools are
+unchanged. Matching VSM packages and SHA-256 checksums accompany the sources.
+
+Regression checks run outside Vectorworks using a mocked vs module. They do
+not establish native dialog behavior, drawing behavior, or VSM loading. Test
+this release on a duplicate drawing before production use.
+
+Run the automated checks from the repository root:
+
+    python -m unittest discover -s tests -v
+
+See VALIDATION.md for coverage and the duplicate-drawing acceptance checklist.
 
 
 GENERAL USE / INSTALLATION
@@ -90,7 +115,7 @@ new library or unfamiliar drawing.
 
 ========================================================================
 1 RESOURCE AUDITOR
-Version: v2.7
+Version: v2.7.1
 ========================================================================
 
 PURPOSE
@@ -150,7 +175,10 @@ IMPORTANT:
 - It will not invent or construct a missing Record Format.
 - It does not alter record field values.
 - It does not alter symbol geometry.
-- Referenced resources are skipped when they cannot safely be modified.
+- Referenced resources and locked resources are skipped separately.
+- If reference or lock status cannot be verified, the resource is not changed.
+- Reference detection uses IsResourceReferenced, available in Vectorworks 2024
+  and later. Compare Record Fields remains read only.
 
 
 B. COMPARE RECORD FIELDS
@@ -177,7 +205,7 @@ This mode is READ ONLY.
 
 ========================================================================
 2 MINDREADER
-Version: v5.0
+Version: v5.0.1
 ========================================================================
 
 PURPOSE
@@ -193,7 +221,7 @@ It can report:
 
 - Vectorworks object type
 - object name and class
-- bounding box and center
+- bounding box and center (v5.0.1 reads the Python API's two-point bounds)
 - parent/container chain
 - symbol identity and Symbol Definition
 - parametric/PON record
@@ -667,7 +695,7 @@ Recommended practice:
 
 ========================================================================
 6 FIXTURE TYPE TO NEW LAYER
-Version: v1.2
+Version: v1.2.1
 ========================================================================
 
 PURPOSE
@@ -703,7 +731,8 @@ WORKFLOW
    Instrument Type(s), scope, and target fixture count before anything moves.
 6. The script creates or reuses one layer per Instrument Type.
 7. Matching Lighting Devices are moved to those layers.
-8. A summary reports the layers used and fixture count per type.
+8. A summary reports verified moves and failed moves, including counts per type.
+   Rejected or unverified moves are not counted as successful.
 
 
 EXAMPLE
@@ -1318,7 +1347,7 @@ F.I.N.G. does not:
 ========================================================================
 ========================================================================
 99 CHUCKLES NOTES
-Version: v1.0.3
+Version: v1.0.4
 In-Vectorworks Quick Reference
 ========================================================================
 
@@ -1368,10 +1397,10 @@ VERSION / AUTHORSHIP
 ========================================================================
 
 1 RESOURCE AUDITOR
-Version: v2.7
+Version: v2.7.1
 
 2 MINDREADER
-Version: v5.0
+Version: v5.0.1
 
 3 MINDREADER ACCESSORY AUTOPSY
 Version: v1.0
@@ -1383,7 +1412,7 @@ Version: v2.0
 Version: v1.3
 
 6 FIXTURE TYPE TO NEW LAYER
-Version: v1.2
+Version: v1.2.1
 
 7 LIGHTING DEVICE ATTRIBUTES
 Version: v1.5
@@ -1398,9 +1427,9 @@ Version: v1.0.2
 Version: v1.0
 
 99 CHUCKLES NOTES
-Version: v1.0.3
+Version: v1.0.4
 
-Package date: 2026-09-07
+Package date: 2026-11-09
 vibed by Chuckles
 
 VWX FAILS =

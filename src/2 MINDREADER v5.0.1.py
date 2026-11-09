@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# VWX FAILS - MINDREADER v5.0
+# VWX FAILS - MINDREADER v5.0.1
 # vibed by Chuckles
-# Date: 2026-08-18
-# Version: v5.0
+# Date: 2026-11-09
+# Version: v5.0.1
 #
 # Universal read-only Vectorworks object inspector.
 #
@@ -142,7 +142,7 @@ def parametric_record(h):
 
 def bbox_text(h):
     try:
-        x1, y1, x2, y2 = vs.GetBBox(h)
+        (x1, y1), (x2, y2) = vs.GetBBox(h)
         return "({:.4f}, {:.4f}) to ({:.4f}, {:.4f})".format(
             x1, y1, x2, y2
         )
@@ -537,7 +537,7 @@ def build_report(sel):
 
     out += [
         "=" * 72,
-        "MINDREADER V5.0 - UNIVERSAL OBJECT INSPECTION",
+        "MINDREADER V5.0.1 - UNIVERSAL OBJECT INSPECTION",
         "=" * 72,
         "READ ONLY",
         "",
@@ -743,7 +743,7 @@ def save_report(text, summary):
         )
     except Exception as e:
         vs.AlrtDialog(
-            "MINDREADER V5.0\n\n"
+            "MINDREADER V5.0.1\n\n"
             "Could not open the folder picker:\n{}".format(e)
         )
         return
@@ -765,7 +765,7 @@ def save_report(text, summary):
         return
 
     filename = vs.StrDialog(
-        "MINDREADER V5.0\n\n"
+        "MINDREADER V5.0.1\n\n"
         "Report filename:",
         suggested
     )
@@ -801,7 +801,7 @@ def save_report(text, summary):
             f.write(text)
 
         vs.AlrtDialog(
-            "MINDREADER V5.0 - REPORT SAVED\n\n{}".format(
+            "MINDREADER V5.0.1 - REPORT SAVED\n\n{}".format(
                 target
             )
         )
@@ -822,7 +822,7 @@ def save_report(text, summary):
                 f.write(text)
 
             vs.AlrtDialog(
-                "MINDREADER V5.0\n\n"
+                "MINDREADER V5.0.1\n\n"
                 "The chosen folder could not be written:\n"
                 "{}\n\n"
                 "I saved the report here instead:\n\n"
@@ -834,7 +834,7 @@ def save_report(text, summary):
 
         except Exception as second_error:
             vs.AlrtDialog(
-                "MINDREADER V5.0\n\n"
+                "MINDREADER V5.0.1\n\n"
                 "Could not save the report.\n\n"
                 "Chosen-folder error:\n{}\n\n"
                 "Fallback error:\n{}".format(
@@ -1033,7 +1033,7 @@ def filter_browser_items(items, text):
 
 def browser_list_text(items, symbol_name, filter_text):
     lines = [
-        "MINDREADER V5.0 - SYMBOL CONTENTS",
+        "MINDREADER V5.0.1 - SYMBOL CONTENTS",
         "",
         "Symbol Definition: {}".format(
             symbol_name
@@ -1068,7 +1068,7 @@ def browser_list_text(items, symbol_name, filter_text):
 
 def pick_object_from_symbol_definition():
     symbol_name = vs.StrDialog(
-        "MINDREADER V5.0\n\n"
+        "MINDREADER V5.0.1\n\n"
         "Type the exact Symbol Definition name to inspect.\n\n"
         "Example:\n"
         "TOC BIG",
@@ -1115,7 +1115,7 @@ def pick_object_from_symbol_definition():
         )
 
     filter_text = vs.StrDialog(
-        "MINDREADER V5.0\n\n"
+        "MINDREADER V5.0.1\n\n"
         "Optional filter.\n\n"
         "Examples:\n"
         "Hyperlink\n"
@@ -1143,7 +1143,7 @@ def pick_object_from_symbol_definition():
 
     if not items:
         vs.AlrtDialog(
-            "MINDREADER V5.0\n\n"
+            "MINDREADER V5.0.1\n\n"
             "Nothing inside {} matched:\n\n"
             "{}".format(
                 symbol_name,
@@ -1168,7 +1168,7 @@ def pick_object_from_symbol_definition():
     )
 
     choice = vs.StrDialog(
-        "MINDREADER V5.0\n\n"
+        "MINDREADER V5.0.1\n\n"
         "Enter the number of the object to inspect:",
         "1"
     )
@@ -1268,7 +1268,7 @@ def selected_object():
 
 def main():
     browse_symbol = vs.YNDialog(
-        "MINDREADER V5.0\n\n"
+        "MINDREADER V5.0.1\n\n"
         "What do you want to inspect?\n\n"
         "YES = OBJECT INSIDE A SYMBOL DEFINITION\n"
         "Use this for things such as a Hyperlink inside your TOC symbol.\n\n"
@@ -1288,7 +1288,7 @@ def main():
     if not valid(sel):
         if error and error != "Cancelled.":
             vs.AlrtDialog(
-                "MINDREADER V5.0\n\n" + error
+                "MINDREADER V5.0.1\n\n" + error
             )
         return
 
@@ -1305,7 +1305,7 @@ def main():
     )
 
     msg = (
-        "MINDREADER V5.0 - UNIVERSAL INSPECTOR\n\n"
+        "MINDREADER V5.0.1 - UNIVERSAL INSPECTOR\n\n"
         "Target source: {selection_source}\n"
         "Object type: {type}\n"
         "Name: {name}\n"

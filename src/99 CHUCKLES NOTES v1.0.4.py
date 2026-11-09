@@ -1,4 +1,4 @@
-# 99 CHUCKLES NOTES v1.0.3
+# 99 CHUCKLES NOTES v1.0.4
 # Self-contained: no network access or separate README file.
 
 import vs
@@ -18,7 +18,7 @@ TEXT_CONTROL_ID = 4
 NOTES_TEXT = r"""VWX FAILS — CHUCKLES NOTES
 QUICK REFERENCE FOR VECTORWORKS FIXES, AUTOMATION, INSPECTION & LIBRARY SCRIPTS
 
-Package date: 2026-09-07
+Package date: 2026-11-09
 vibed by Chuckles
 
 ===============================================================================
@@ -69,7 +69,7 @@ it in an unfamiliar file.
 
 
 ===============================================================================
-1 RESOURCE AUDITOR — v2.7
+1 RESOURCE AUDITOR — v2.7.1
 ===============================================================================
 
 WHAT IT DOES
@@ -101,11 +101,13 @@ IMPORTANT
 - It only attaches Record Formats already present in the current file.
 - It does not invent Record Formats.
 - It does not alter field values or symbol geometry.
-- Referenced resources are skipped when they cannot be modified safely.
+- Reference status uses IsResourceReferenced (Vectorworks 2024 or later).
+- Referenced and locked resources are skipped separately.
+- Resources with unverified reference or lock status are not changed.
 
 
 ===============================================================================
-2 MINDREADER — v5.0
+2 MINDREADER — v5.0.1
 ===============================================================================
 
 WHAT IT DOES
@@ -116,6 +118,7 @@ Universal read-only object inspector. Its central question is:
 It can report object type, name, class, bounds, center, parent/container chain,
 symbol identity, parametric record, attached records and fields, exposed child
 contents, embedded Symbol Definitions, and Lighting Device clues.
+Version 5.0.1 reads the two point tuples returned by the Python bounds API.
 
 SELECTED DRAWING OBJECT
 1. Select exactly one ordinary drawing object.
@@ -234,7 +237,7 @@ exactly. Update the deployed script resource or plug-in afterward.
 
 
 ===============================================================================
-6 FIXTURE TYPE TO NEW LAYER — v1.2
+6 FIXTURE TYPE TO NEW LAYER — v1.2.1
 ===============================================================================
 
 WHAT IT DOES
@@ -254,6 +257,7 @@ IMPORTANT
 - It moves Lighting Devices; it does not duplicate them.
 - Existing layers with matching generated names are reused.
 - Selection can span layers when Layer Options permit cross-layer editing.
+- Only verified moves count as successful; failures are reported per type.
 
 
 ===============================================================================
@@ -409,7 +413,7 @@ IMPORTANT
 
 
 ===============================================================================
-99 CHUCKLES NOTES — v1.0.3
+99 CHUCKLES NOTES — v1.0.4
 ===============================================================================
 
 WHAT IT DOES
@@ -431,17 +435,17 @@ Editing text in this window does not change the script.
 VERSION LIST
 ===============================================================================
 
-1  RESOURCE AUDITOR                         v2.7
-2  MINDREADER                              v5.0
+1  RESOURCE AUDITOR                         v2.7.1
+2  MINDREADER                              v5.0.1
 3  MINDREADER ACCESSORY AUTOPSY             v1.0
 4  HYPERLINK REBUILDER                      v2.0
 5  STIRRUP HANGER INSERTION TRICK           v1.3
-6  FIXTURE TYPE TO NEW LAYER                v1.2
+6  FIXTURE TYPE TO NEW LAYER                v1.2.1
 7  LIGHTING DEVICE ATTRIBUTES               v1.5
 8  DR. DOOM                                 v1.2
 9  PICK A UNIT! ANY UNIT!                   v1.0.2
 10 F.I.N.G.                                 v1.0
-99 CHUCKLES NOTES                           v1.0.3
+99 CHUCKLES NOTES                           v1.0.4
 
 VWX FAILS =
 Vectorworks Fixes, Automation, Inspection & Library Scripts.

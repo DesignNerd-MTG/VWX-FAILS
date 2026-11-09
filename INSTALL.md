@@ -1,8 +1,8 @@
 VWX FAILS
 INSTALLATION AND DEPLOYMENT
 
-Package date: 2026-09-07
-Collection release: VWX FAILS 2.0
+Package date: 2026-11-09
+Collection release: VWX FAILS 2.0.1
 
 ========================================================================
 WHICH FILES SHOULD I USE?
@@ -31,6 +31,10 @@ INSTALL THE VSM PLUG-INS
 4. Open the Workspace Editor.
 5. Add the VWX FAILS commands to the desired menu in the active workspace.
 6. Save the workspace and test the commands in a duplicate drawing.
+
+For 2.0.1, update Resource Auditor, MINDREADER, Fixture Type to New Layer, and
+CHUCKLES NOTES. Retire each older versioned file rather than leaving both
+versions in the Plug-ins folder. The remaining seven commands are unchanged.
 
 If an older copy of a command is already installed, replace that deployed VSM
 with the newer matching file. Keep only one active copy of each command across
@@ -80,21 +84,24 @@ When a tool changes:
 NEXT VSM REBUILD: DISPLAY-NAME STANDARD
 ========================================================================
 
-The current VSM files in this release are preserved exactly as exported.
+The 2.0.1 patch refreshes the embedded Python source in the four changed VSMs
+while preserving their existing command metadata and icons. Container and
+source-parity checks are automated; native Vectorworks loading has not been
+validated for this patch. The other seven VSMs are unchanged.
 
-When each plug-in is next rebuilt, use these descriptive Vectorworks command
+When each plug-in is next rebuilt in Vectorworks, use these descriptive command
 names so the acronyms remain recognizable without hiding what the tools do:
 
-1  RESOURCE AUDITOR v2.7
-2  MINDREADER v5.0
+1  RESOURCE AUDITOR v2.7.1
+2  MINDREADER v5.0.1
 3  MINDREADER ACCESSORY AUTOPSY v1.0
 4  HYPERLINK REBUILDER v2.0
 5  S.H.I.T. — STIRRUP HANGER INSERTION TRICK v1.3
-6  FIXTURE TYPE TO NEW LAYER v1.2
+6  FIXTURE TYPE TO NEW LAYER v1.2.1
 7  LIGHTING DEVICE ATTRIBUTES v1.5
 8  DR. DOOM — DRAWING REVIEW, DIAGNOSTICS, ORGANIZATION & OBJECT MANIPULATION v1.2
 9  PICK A UNIT! ANY UNIT! v1.0.2
 10 F.I.N.G. — FILE INVENTORY NORMALIZATION GOVERNOR v1.0
-99 CHUCKLES NOTES v1.0.3
+99 CHUCKLES NOTES v1.0.4
 
 Keep the shelf number first and keep CHUCKLES NOTES last.

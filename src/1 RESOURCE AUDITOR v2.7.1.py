@@ -1,7 +1,7 @@
-# VWX FAILS - RESOURCE AUDITOR v2.7
+# VWX FAILS - RESOURCE AUDITOR v2.7.1
 # vibed by Chuckles
-# Date: 2026-08-19
-# Version: v2.7
+# Date: 2026-11-09
+# Version: v2.7.1
 #
 # Vectorworks Fixes, Automation, Inspection & Library Scripts
 # Text-entry version with an on-screen list of available Record Formats.
@@ -10,7 +10,7 @@
 import vs
 
 RECORD_FORMAT_TYPE = 47
-REFERENCED_RESOURCE_SELECTOR = 700
+LOCKED_OBJECT_SELECTOR = 700
 DEFAULT_RESOURCE_TYPE = 16
 DEFAULT_LOOK_FOR = "Light Info Record"
 DEFAULT_REQUIRE_ADD = "EntEquipUniversal"
@@ -146,15 +146,33 @@ def has_record(h, name):
 
 
 def is_referenced(h):
+    # Vectorworks returns (isReferenced, pathname), not a single Boolean.
+    # None means unknown: never treat an unavailable check as permission to edit.
     try:
-        return bool(
-            vs.GetObjectVariableBoolean(
-                h,
-                REFERENCED_RESOURCE_SELECTOR
-            )
-        )
-    except:
-        return False
+        result = vs.IsResourceReferenced(h)
+        if (isinstance(result, tuple) and len(result) == 2
+                and isinstance(result[0], bool) and isinstance(result[1], str)):
+            return result[0]
+    except Exception:
+        pass
+    return None
+
+
+def modification_block(h):
+    referenced = is_referenced(h)
+    if referenced is None:
+        return "unknown"
+    if referenced:
+        return "referenced"
+    try:
+        locked = vs.GetObjectVariableBoolean(h, LOCKED_OBJECT_SELECTOR)
+        if not isinstance(locked, bool):
+            return "unknown"
+        if locked:
+            return "locked"
+    except Exception:
+        return "unknown"
+    return None
 
 
 def resources_of_type(resource_type):
@@ -430,6 +448,8 @@ def audit_resources(
         "good": [],
         "missing": [],
         "referenced_missing": [],
+        "locked_missing": [],
+        "unknown_missing": [],
     }
 
     resources = resources_of_type(
@@ -476,8 +496,9 @@ def audit_resources(
             missing
         )
 
-        if is_referenced(h):
-            result["referenced_missing"].append(
+        block = modification_block(h)
+        if block:
+            result[block + "_missing"].append(
                 item
             )
         else:
@@ -649,7 +670,10 @@ def run_find_add():
         "Matched: {matched}\n"
         "Already good: {good}\n"
         "Need the record added: {missing}\n"
-        "Referenced resources skipped: {referenced}"
+        "Referenced resources skipped: {referenced}\n"
+        "Locked resources skipped: {locked}\n"
+        "Unknown reference/lock status skipped: {unknown}\n"
+        "Unknown means the safety check is unavailable or returned invalid data."
     ).format(
         resource_type=resource_type,
         look_for=look_summary,
@@ -660,6 +684,8 @@ def run_find_add():
         good=len(result["good"]),
         missing=len(result["missing"]),
         referenced=len(result["referenced_missing"]),
+        locked=len(result["locked_missing"]),
+        unknown=len(result["unknown_missing"]),
     )
 
     if result["missing"]:
@@ -674,7 +700,7 @@ def run_find_add():
         vs.AlrtDialog(
             "VWX FAILS - Resource Auditor\n\n" +
             summary +
-            "\n\nEverything you asked me to check is already good.\n"
+            "\n\nNo editable resources need records added.\n"
             "No changes were made."
         )
         return
@@ -699,6 +725,13 @@ def run_find_add():
     failed = []
 
     for h, resource_name, missing in result["missing"]:
+        # Recheck after the confirmation dialog before mutating the resource.
+        block = modification_block(h)
+        if block:
+            for record_name in missing:
+                failed.append((resource_name, record_name,
+                               "Skipped: {} reference/lock safety status.".format(block)))
+            continue
         for record_name in missing:
             attempted += 1
 
@@ -744,12 +777,16 @@ def run_find_add():
         "Records I tried to add: {attempted}\n"
         "Successfully added: {added}\n"
         "Could not add: {failed}\n"
-        "Still missing after double-checking: {still_missing}"
+        "Still missing after double-checking: {still_missing}\n"
+        "Referenced, locked, or unknown-status resources skipped: {skipped}"
     ).format(
         attempted=attempted,
         added=added,
         failed=len(failed),
-        still_missing=len(verify["missing"])
+        still_missing=sum(len(verify[key]) for key in
+                          ("missing", "referenced_missing", "locked_missing", "unknown_missing")),
+        skipped=sum(len(verify[key]) for key in
+                    ("referenced_missing", "locked_missing", "unknown_missing"))
     )
 
     if failed:
@@ -763,7 +800,8 @@ def run_find_add():
                 )
             )
 
-    if not failed and not verify["missing"]:
+    if not failed and not any(verify[key] for key in
+                              ("missing", "referenced_missing", "locked_missing", "unknown_missing")):
         message += (
             "\n\nEverything you asked me to check is now good."
         )
@@ -775,7 +813,7 @@ def run_find_add():
 
 def main():
     compare_mode = vs.YNDialog(
-        "VWX FAILS - Resource Auditor v2.7\n\n"
+        "VWX FAILS - Resource Auditor v2.7.1\n\n"
         "What do you want to do?\n\n"
         "YES = COMPARE RECORD FIELDS\n"
         "See what fields a record contains, or compare two records.\n\n"
